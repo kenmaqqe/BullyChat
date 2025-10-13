@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const { message } = await req.json();
 
   const stream = await client.chat.completions.create({
-    model: "zai-org/GLM-4.6:novita",
+    model: "zai-org/GLM-4.6:zai-org",
     messages: [
       {
         role: "user",

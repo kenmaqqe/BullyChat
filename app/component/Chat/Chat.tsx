@@ -25,7 +25,6 @@ export default function Chat() {
       if (done) break;
       const chunk = decoder.decode(value, { stream: true });
       text += chunk;
-      console.log(chunk);
       setResponse(text);
     }
   }
