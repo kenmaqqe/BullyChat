@@ -1,34 +1,15 @@
 "use client";
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
+import { useBullyStore } from "@/app/store/useBullyStore";
 
 export default function Chat() {
   const [input, setInput] = useState("");
-  const [response, setResponse] = useState("");
+  const addNewMessage = useBullyStore((state) => state.addNewMessage);
 
-  async function askAi(message: string) {
-    const res = await fetch("/api/chatMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message }),
-    });
-
-    const reader = res.body?.getReader();
-    const decoder = new TextDecoder();
-    let text = "";
-
-    if (!reader) return;
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      text += chunk;
-      console.log(chunk);
-      setResponse(text);
-    }
-  }
+  const askAi = (question: string) => {
+    addNewMessage({ id: crypto.randomUUID(), role: "user", content: question });
+    setInput("");
+  };
 
   return (
     <div className="p-4 space-y-4">
@@ -45,9 +26,6 @@ export default function Chat() {
       >
         Ask
       </button>
-      {response && (
-        <ReactMarkdown rehypePlugins={[rehypeKatex]}>{response}</ReactMarkdown>
-      )}
     </div>
   );
 }

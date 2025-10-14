@@ -3,7 +3,7 @@ import { OpenAI } from "openai";
 
 const client = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1",
-  apiKey: process.env.HF_API_KEY,
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function POST(req: Request) {

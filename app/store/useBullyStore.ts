@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 type Message = {
+  id: string;
   role: "ai" | "user";
   content: string;
 };
