@@ -1,12 +1,22 @@
 import { create } from "zustand";
 
+type Message = {
+  role: "ai" | "user";
+  content: string;
+};
+
 interface BullyState {
   warningModalIsOpen: boolean;
   setWarningModalIsOpen: (isOpen: boolean) => void;
+  messages: Message[];
+  addNewMessage: (newMessage: Message) => void;
 }
 
 export const useBullyStore = create<BullyState>((set) => ({
   warningModalIsOpen: true,
+  messages: [],
   setWarningModalIsOpen: (isOpen: boolean) =>
     set({ warningModalIsOpen: isOpen }),
+  addNewMessage: (newMessage: Message) =>
+    set((state) => ({ messages: [...state.messages, newMessage] })),
 }));
