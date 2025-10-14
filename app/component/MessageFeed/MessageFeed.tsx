@@ -32,7 +32,9 @@ const MessageFeed = () => {
                   : "bg-zinc-800 text-zinc-100"
               }`}
             >
-              <p className="whitespace-pre-wrap">{message.content}</p>
+              <p className="whitespace-pre-wrap">
+                {message.content ? message.content : "Thinking..."}
+              </p>
             </div>
 
             {message.role === "user" && (

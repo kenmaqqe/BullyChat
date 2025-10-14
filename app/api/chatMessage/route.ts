@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const { message } = await req.json();
 
   const stream = await client.chat.completions.create({
-    model: "llama-3.1-8b-instant",
+    model: "meta-llama/llama-4-maverick-17b-128e-instruct",
     messages: [
       {
         role: "system",
