@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BullyChat
+
+A sarcastic AI chatbot that roasts your ideas with wit, humor, and irony. Powered by [Groq](https://groq.com/) (Llama 4 Scout) and built with Next.js.
+
+Every response is a clever punchline — served in Ukrainian.
+
+## Features
+
+- **Real-time streaming** — AI responses appear token-by-token as they're generated
+- **Sarcastic persona** — the bot roasts your ideas, not you personally
+- **Ukrainian language** — all responses are in Ukrainian
+- **Warning modal** — disclaimer shown on first visit (it's just for fun)
+- **Clean UI** — dark theme, chat bubbles, auto-scroll
+
+## Tech Stack
+
+| Category | Technology |
+|---|---|
+| Framework | [Next.js 15](https://nextjs.org/) (App Router) |
+| Language | TypeScript 5 |
+| UI | React 19, [Tailwind CSS 4](https://tailwindcss.com/) |
+| State | [Zustand](https://zustand-demo.pmnd.rs/) |
+| LLM | [Groq API](https://groq.com/) (Llama 4 Scout 17B) |
+| Icons | [Lucide React](https://lucide.dev/) |
+| Linting | [Biome](https://biomejs.dev/) |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- A [Groq API key](https://console.groq.com/keys)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/BullyChat.git
+cd BullyChat
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the project root:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
 
-## Learn More
+### Run
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Development
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Production build
+npm run build
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/
+├── api/chatMessage/route.ts    # POST endpoint — streams LLM response
+├── store/useBullyStore.ts      # Zustand store (messages, modal state)
+├── component/
+│   ├── Chat/Chat.tsx           # Input field + send button
+│   ├── MessageFeed/MessageFeed.tsx  # Message display with auto-scroll
+│   └── InfoModal/InfoModal.tsx      # Warning/disclaimer modal
+├── page.tsx                    # Home page
+├── layout.tsx                  # Root layout
+└── globals.css                 # Global styles + animations
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server (Turbopack) |
+| `npm run build` | Production build |
+| `npm start` | Start production server |
+| `npm run lint` | Run Biome linter |
+| `npm run format` | Format code with Biome |
+
+## License
+
+MIT

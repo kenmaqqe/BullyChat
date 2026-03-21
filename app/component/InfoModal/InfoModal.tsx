@@ -4,7 +4,7 @@ import { useBullyStore } from "@/app/store/useBullyStore";
 
 const InfoModal = () => {
   const setWarningModalIsOpen = useBullyStore(
-    (state) => state.setWarningModalIsOpen
+    (state) => state.setWarningModalIsOpen,
   );
   const warningModalIsOpen = useBullyStore((state) => state.warningModalIsOpen);
 
